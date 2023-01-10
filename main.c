@@ -17,30 +17,36 @@
 */
 
 #include <stdio.h>
-#include "SDL.h"
+#include "SDL2/SDL.h"
+
 #define true 1
 #define false 0
 
-const SCREEN_WIDTH = 640;
-const SCREEN_HEIGHT = 480;
-
-
-void init_sdl(void) {
-
-}
-
-
-void cleanup_sdl(void) {
-
-}
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
 
 
 int main() {
-    printf("----------DEBUT DU PROJET----------\n");
+    SDL_Init(SDL_INIT_EVERYTHING);
+    SDL_Window *window = SDL_CreateWindow("Chip 8 Emulator", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    if (window == NULL) {
+        printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+        return 1;
+    }
 
-    // Initialize SDL
+    SDL_Event windowEvent;
 
-    // Final cleanup
+    while (true) {
+        if (SDL_PollEvent(&windowEvent)) {
+            if (windowEvent.type == SDL_QUIT) {
+                break;
+            }
+        }
+    }
 
-    return 0;
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return EXIT_SUCCESS;
+
 }
