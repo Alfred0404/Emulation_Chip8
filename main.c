@@ -35,6 +35,8 @@ int main() {
             // update the surface
             SDL_UpdateWindowSurface(window);
 
+            // hack to keep window open
+            SDL_Delay(2000);
         }
     }
     // destroy window
