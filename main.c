@@ -3,6 +3,4 @@
 
 int main() {
     printf("----------DEBUT DU PROJET----------\n");
-    printf("OK\n");
-    printf("bite");
 }
