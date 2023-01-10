@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdint.h>
 #include "SDL2/SDL.h"
 
 /* Chip 8 specifications :
@@ -27,16 +28,36 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
 
-int init_sdl(void) {
+typedef struct {
+    SDL_Window* window;
+} sdl_t;
+
+
+typedef struct {
+    uint32_t window_height;
+    uint32_t window_width;
+} config_t;
+
+
+int init_sdl(sdl_t* sdl, const config_t* config) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) != 0) {
         SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
         return 1;
     }
+
+    sdl->window = SDL_CreateWindow("Chip 8 Emulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, config.window_height, config.window_width, 0);
+
+    if (!sdl->window) {
+        SDL_Log("Failed to create window: %s", SDL_GetError());
+        return 1;
+    }
+
     return 0;
 }
 
 
 void final_cleanup(void) {
+    SDL_DestroyWindow(window);
     SDL_Quit();
 }
 
@@ -46,11 +67,11 @@ int main(int argv, char** args) {
     (void)args;
 
     // Init SDL
-    if(init_sdl() != 0) exit(EXIT_FAILURE);
+    sdl_t sdl = {0};
+    if(init_sdl(&sdl) != 0) exit(EXIT_FAILURE);
 
     //Final cleanup
     final_cleanup();
 
     exit(EXIT_SUCCESS);
-
 }
