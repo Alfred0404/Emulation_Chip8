@@ -1,49 +1,46 @@
+/* Chip 8 specifications :
+
+- memory : 4Kbits (4096 bits)
+- opcodes : 35 instructions
+- registers : 15 8bits
+- index register and program counter : values between 0x000 and 0xFFF
+- memory map :
+    0x000-0x1FF : Chip 8 interpreter (contains font set in emu)
+    0x050-0x0A0 : Used for the built in 4x5 pixel font set (0-F)
+    0x200-0xFFF : Program ROM and work RAM
+
+- graphic system : one instruction to draw sprite on the screen
+                   only black and white and has 2048px (63 x 32)
+
+- HEX based keypad (16 keys) 
+
+*/
+
 #include <stdio.h>
 #include "SDL.h"
 #define true 1
 #define false 0
 
-
 const SCREEN_WIDTH = 640;
 const SCREEN_HEIGHT = 480;
 
+
+void init_sdl(void) {
+
+}
+
+
+void cleanup_sdl(void) {
+
+}
 
 
 int main() {
     printf("----------DEBUT DU PROJET----------\n");
 
-    SDL_Window *window = NULL;
-    SDL_Surface *screenSurface = NULL;
-
     // Initialize SDL
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-    }
-    else {
-        // Create window
-        window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-        if (window == NULL) {
-            printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-        }
-        else {
-            // get window surface
-            screenSurface = SDL_GetWindowSurface(window);
 
-            // fill the surface white
-            SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
-
-            // update the surface
-            SDL_UpdateWindowSurface(window);
-
-            // hack to keep window open
-            SDL_Delay(2000);
-        }
-    }
-    // destroy window
-    SDL_DestroyWindow(window);
-
-    // quit SDL subsystems
-    SDL_Quit();
+    // Final cleanup
 
     return 0;
 }
