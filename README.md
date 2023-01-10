@@ -10,5 +10,6 @@ Chip-8 is a simple, interpreted, programming language which was first used on so
 # Links
 https://tobiasvl.github.io/blog/write-a-chip-8-emulator/
 https://fr.wikipedia.org/wiki/CHIP-8#:~:text=CHIP%2D8%20est%20un%20langage,par%20Joseph%20Weisbecker%20en%201978.
-http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#0.1
+http://devernay.free.fr/hacks/chip8/C8TECH10.HTM
 https://github.com/mattmikolay/chip-8/wiki/Mastering-CHIP%E2%80%908
+https://www.youtube.com/watch?v=YvZ3LGaNiS0&list=PLT7NbkyNWaqbyBMzdySdqjnfUFxt8rnU_
