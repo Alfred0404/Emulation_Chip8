@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include "SDL2/SDL.h"
+
 /* Chip 8 specifications :
 
 - memory : 4Kbits (4096 bits)
@@ -16,8 +19,6 @@
 
 */
 
-#include <stdio.h>
-#include "SDL2/SDL.h"
 
 #define true 1
 #define false 0
