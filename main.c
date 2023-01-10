@@ -27,27 +27,30 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
 
-int main(int argv, char** args) {
-    SDL_Init(SDL_INIT_EVERYTHING);
-    SDL_Window *window = SDL_CreateWindow("Chip 8 Emulator", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-    if (window == NULL) {
-        printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+int init_sdl(void) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) != 0) {
+        SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
         return 1;
     }
+    return 0;
+}
 
-    SDL_Event windowEvent;
 
-    while (true) {
-        if (SDL_PollEvent(&windowEvent)) {
-            if (windowEvent.type == SDL_QUIT) {
-                break;
-            }
-        }
-    }
-
-    SDL_DestroyWindow(window);
+void final_cleanup(void) {
     SDL_Quit();
+}
 
-    return EXIT_SUCCESS;
+
+int main(int argv, char** args) {
+    (void)argv;
+    (void)args;
+
+    // Init SDL
+    if(init_sdl() != 0) exit(EXIT_FAILURE);
+
+    //Final cleanup
+    final_cleanup();
+
+    exit(EXIT_SUCCESS);
 
 }
